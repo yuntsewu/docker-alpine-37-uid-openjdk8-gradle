@@ -27,4 +27,4 @@ exec docker run \
   -v "`pwd`:/work" \
   -v "$HOME:/home/hostuser" \
   wtanaka/alpine-37-uid-openjdk8-gradle \
-  /opt/gradle/bin/gradle "$@"
+  gradle "$@"
