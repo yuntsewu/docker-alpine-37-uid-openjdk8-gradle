@@ -1,6 +1,6 @@
 FROM wtanaka/alpine-37-uid-openjdk8
 MAINTAINER http://wtanaka.com/dockerfiles
-ARG GRADLE_VERSION=4.6
+ARG GRADLE_VERSION=3.4.1
 ENV PATH="${PATH}:/opt/gradle/bin"
 RUN mkdir -p /opt \
   && cd /tmp \
