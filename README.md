@@ -13,4 +13,23 @@ To download: [`docker pull wtanaka/alpine-37-uid-openjdk8-gradle`](https://hub.d
 Examples
 --------
 
+Run latest gradle in current directory:
+
 ```docker run --rm -e "HOSTUID=`id -u`" -v "`pwd`:/work" -v "$HOME:/home/hostuser" wtanaka/alpine-37-uid-openjdk8-gradle gradle build```
+
+Use an older version like Gradle 2.14:
+
+```docker run --rm -e "HOSTUID=`id -u`" -v "`pwd`:/work" -v "$HOME:/home/hostuser" wtanaka/alpine-37-uid-openjdk8-gradle:2.14 gradle build```
+
+Create a specific gradle wrapper version in the current directory:
+
+```
+rm -f tmpcidfile
+docker run --cidfile=tmpcidfile -e "HOSTUID=`id -u`" \
+wtanaka/alpine-37-uid-openjdk8-gradle \
+sh -c "mkdir wrap; cd wrap; \
+  /opt/gradle/bin/gradle wrapper --gradle-version=2.14"
+docker cp `cat tmpcidfile`:/home/hostuser/wrap .
+mv wrap/* .
+rm -rf wrap tmpcidfile
+```
